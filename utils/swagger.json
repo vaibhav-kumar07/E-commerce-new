@@ -1,0 +1,582 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "E-Commerce App Endpoints",
+    "description": "API endpoints for E-commerce App",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3003/"
+    },
+    {
+      "url":"https://e-commerce-w51c.onrender.com/"
+    }
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+],
+"produces": [
+    "application/json"
+],
+  "paths": {
+    "/user/signup": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Create a new user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/UserInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "User created successfully"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/user/generateOtp": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Send OTP to email to activate account",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/GenerateAndVerifyOtpViaEmail"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OTP sent to email successfully"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/user/verifyOtp": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Verify OTP to activate your account",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/GenerateAndVerifyOtpViaEmail"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OTP verified successfully"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/user/login": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "User login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Login"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Login successful"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+      "/user/changePassword": {
+        "post": {
+          "tags": [
+            "Users"
+          ],
+          "description": "Change password using old password",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "requestBody": {
+            "description": "Change password inputs",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/passwordInputs"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Password changed successfully"
+            },
+            "400": {
+              "description": "Input is wrong"
+            }
+          }
+        }
+      },
+      "/user/logout": {
+        "post": {
+          "tags": [
+            "Users"
+          ],
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "summary": "Logout user",
+          "responses": {
+            "200": {
+              "description": "User logged out successfully"
+            },
+            "400": {
+              "description": "Access denied! Invalid token"
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        }
+      },
+      "/product": {
+        "post": {
+          "tags": [
+            "Products"
+          ],
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "summary": "Create product",
+          "requestBody": {
+            "description": "Create product",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/ProductInput"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Product created successfully"
+            },
+            "400": {
+              "description": "Bad Request"
+            }
+          }
+        }
+     ,
+        "get": {
+          "summary": "Get all products",
+          "tags": [
+            "Products"
+          ],
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "description": "Retrieve a list of all products",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad Request"
+            }
+          }
+        }
+      },
+      "/product/id": {
+        "patch": {
+          "tags": [
+            "Products"
+          ],
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "summary": "Update product",
+          "requestBody": {
+            "description": "Update product",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/ProductInput"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Product updated successfully"
+            },
+            "400": {
+              "description": "Bad Request"
+            }
+          }
+        },
+      "delete": {
+        "tags": [
+          "Products"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "summary": "Delete product",
+        "parameters": [
+          {
+            "name": "pid",
+            "in": "path",
+            "description": "Product ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Product deleted successfully"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/cart": {
+      "post": {
+        "tags": [
+          "Carts"
+        ],
+        "description":"add Product to cart ",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "summary": "Add product to cart",
+       
+        "requestBody": {
+          "description": "Product IDs",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/CartInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Products added to cart successfully"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get full cart",
+        "tags": [
+          "Carts"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "Retrieve cart",
+    
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/order": {
+      "post": {
+        "summary": "Place order",
+        "tags": [
+          "Orders"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "Place order",
+     
+        "requestBody": {
+          "description": "Place order",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/OrderInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Order is created and remains in pending state"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "get": {
+        "summary": "Show order",
+        "tags": [
+          "Orders"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "Show order",
+      
+        "responses": {
+          "200": {
+            "description": "Order is created and remains in pending state"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+        "bearerAuth": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "scheme": "bearer",
+            "bearerFormat": "JWT",
+            "in": "header"
+        }
+    }
+},
+  "definitions": {
+    "UserInput": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "Admin",
+            "Consumer"
+          ]
+        },
+        "phoneNumber": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "userName",
+        "password",
+        "role",
+        "email",
+        "phoneNumber"
+      ]
+    },
+    "GenerateAndVerifyOtpViaEmail": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "otp": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "email"
+      ]
+    },
+    "Login": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "TokenInput": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string"
+        }
+      }
+    },
+    "passwordInputs": {
+      "type": "object",
+      "properties": {
+        "oldPassword": {
+          "type": "string"
+        },
+        "newPassword": {
+          "type": "string"
+        }
+      }
+    },
+    "ProductInput": {
+      "type": "object",
+      "properties": {
+      "productid":{
+        "type":"string"
+      },
+        "Title": {
+          "type": "string"
+        },
+        "Description": {
+          "type": "string"
+        },
+        "Price": {
+          "type": "Number"
+        },
+        "Availability": {
+          "type": "Boolean"
+        },
+        "Category": {
+          "$ref": "#/definitions/Category"
+        }
+      }
+    },
+    "Category": {
+      "type": "string",
+      "enum": [
+        "Personal care",
+        "Electronics",
+        "Baby care",
+        "Dairy",
+        "tea-coffee",
+        "food",
+        "fruits"
+      ]
+    },
+    "CartInput": {
+      "type": "object",
+      "properties": {
+        "products": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "productId": {
+                "type": "string"
+              },
+              "quantity": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "productId",
+              "quantity"
+            ]
+          }
+        }
+      },
+      "required": [
+        "items"
+      ]
+    }
+,    
+    "OrderInput": {
+      "type": "object",
+      "properties": {
+        "Address": {
+          "type": "string"
+        }
+      }
+    }
+  
+}
+}

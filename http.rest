@@ -1,0 +1,129 @@
+
+# @baseurl=https://ecommerce-production-59b6.up.railway.app/
+# @baseurl1=https://e-commerce-w51c.onrender.com/
+# @baseurl2=http://localhost:3003/
+# @token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiI2NDgwMjg4M2IyMzVjOTAzMzUxODA4NTkiLCJpYXQiOjE2ODYxNDg5MTl9.s3cA2YI29N3CAZbfcZeJCM1HFLg7zvv_w-CysjncrdA
+POST http://localhost:3003/auth/signUp
+Content-Type: application/json
+
+{
+    "name":"vaibhav kumar",
+    "email":"viranshk7@gmail.com",
+    "password":"1234567",
+    "role":"Admin",
+    "phoneNumber":"8930485009"
+}
+
+###
+
+
+POST http://localhost:3003/auth/emailVerification
+Content-Type: application/json
+
+{
+    "email":"viranshk7@gmail.com",
+    "otp":"263323"
+}
+
+
+
+###
+POST http://localhost:3003/auth/login
+Content-Type: application/json
+
+{
+    "email":"viranshk7@gmail.com",
+    "password":"1234567"
+}
+
+
+
+###
+POST  http://localhost:3003/auth/changePassword
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDgwYzQwY2ZlZDBjODViZTExZGYxNTQiLCJpc0FjdGl2ZSI6dHJ1ZSwiaWF0IjoxNjg2MTYwNzIzLCJleHAiOjE2ODYyNDcxMjN9.jdtAqPxmvORuV5dhrnQaRKbjrx_5KBECXAZq9AwNErE
+
+{
+    "oldPassword":"123456",
+    "newPassword":"1234567"
+}
+###
+POST  http://localhost:3003/auth/logout
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDgwYzQwY2ZlZDBjODViZTExZGYxNTQiLCJpc0FjdGl2ZSI6dHJ1ZSwiaWF0IjoxNjg2MTYwNzIzLCJleHAiOjE2ODYyNDcxMjN9.jdtAqPxmvORuV5dhrnQaRKbjrx_5KBECXAZq9AwNErE
+
+####
+POST http://localhost:3003/product/createProduct
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDgxNzJiY2Q2MWQ5MTk0MTM2YzljMGIiLCJpc0FjdGl2ZSI6dHJ1ZSwiaWF0IjoxNjg2MjE0MTEwLCJleHAiOjE2ODYzMDA1MTB9.kAkJdJ-euvaYhrF4m49ObLNTlPqJlG4rTlSL37s295A
+
+{
+    "Title":"mango",
+    "Description":"mango is more delicious ",
+    "Price":20,
+    "Availability":true,
+    "Category":"fruits"
+}
+###
+
+GET http://localhost:3003/product/
+Content-Type: application/json
+Authorization: bearer 
+
+###
+
+PATCH http://localhost:3003/product/
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDgwYzQwY2ZlZDBjODViZTExZGYxNTQiLCJpc0FjdGl2ZSI6dHJ1ZSwiaWF0IjoxNjg2MTYwNzIzLCJleHAiOjE2ODYyNDcxMjN9.jdtAqPxmvORuV5dhrnQaRKbjrx_5KBECXAZq9AwNErE
+
+{
+    "Productid":"64802f2507d6a2961cc02192",
+    "Title":"cake",
+    "Description":"cake is very delicious ",
+    "Price":2000,
+    "Availability":true,
+    "Category":"Dairy"
+}
+
+###
+DELETE http://localhost:3003/product/deleteProduct
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDgwYzQwY2ZlZDBjODViZTExZGYxNTQiLCJpc0FjdGl2ZSI6dHJ1ZSwiaWF0IjoxNjg2MTYwNzIzLCJleHAiOjE2ODYyNDcxMjN9.jdtAqPxmvORuV5dhrnQaRKbjrx_5KBECXAZq9AwNErE
+
+{
+    "ProductId":"6480cd0f2ee7fd78ae092a0b"
+}
+###
+POST http://localhost:3003/userCart/
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDg0NmQ4Mjk1OTMyMGVlMjNhZDY4ZjgiLCJpc0FjdGl2ZSI6dHJ1ZSwiaWF0IjoxNjg2NDAxNDc4LCJleHAiOjE2ODY0ODc4Nzh9.2nTyYowX1dNwXdfZW78GP-t9-WLP8-j7VykBkKGhQTg
+
+{
+    "products":[{
+      "productId": "648195fb63360ec7537b08b7",
+      "quantity": 2
+     },{
+      "productId": "6481961363360ec7537b08bb",
+      "quantity": 4
+     }]
+}
+  
+###
+GET  http://localhost:3003/cart/showCart
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDgwYWQzZGRmMzI5N2IwYjY4N2Y3MzIiLCJpc0FjdGl2ZSI6dHJ1ZSwiaWF0IjoxNjg2MTU4OTkxLCJleHAiOjE2ODYyNDUzOTF9.ynKhiiru4dZGg9FobpSZH1goonTCV5lnx2pqDhLErgU
+
+
+
+###
+POST http://localhost:3003/orders/placeOrder
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDgwYWQzZGRmMzI5N2IwYjY4N2Y3MzIiLCJpc0FjdGl2ZSI6dHJ1ZSwiaWF0IjoxNjg2MTU4OTkxLCJleHAiOjE2ODYyNDUzOTF9.ynKhiiru4dZGg9FobpSZH1goonTCV5lnx2pqDhLErgU
+
+{
+    "Address":"gurgaon"
+}
+###
+GET  http://localhost:3003/orders/showOrder
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDgwYWQzZGRmMzI5N2IwYjY4N2Y3MzIiLCJpc0FjdGl2ZSI6dHJ1ZSwiaWF0IjoxNjg2MTU4OTkxLCJleHAiOjE2ODYyNDUzOTF9.ynKhiiru4dZGg9FobpSZH1goonTCV5lnx2pqDhLErgU
