@@ -1,53 +1,33 @@
+const NodeCache = require("node-cache");
 const authService = require("../services/authService");
-const User = require("../models/userSchema")
+const { validateName, validateEmail } = require('../services/validationservice');
+const Nodecache = require("node-cache");
+const mycache = new NodeCache({ stdTTL: 60 });
+exports.createUser = async (req, res) => {
+    console.log("in auth controller createUser");
+    const {
+        name,
+        email,
+        password,
+        role,
+        phoneNumber
+    } = req.body;
 
-function validateName(name, email) {
-    const regex = /^[a-zA-Z0-9\s-]*$/;
-    const emailRegex = /^(?!.*[<>]).*[\w+\-.]+@[a-zA-Z0-9\-]+(\.[a-zA-Z]{2,})+$/
-    if (regex.test(name)) {
-        return true; // Return null when name is valid
-    } else if (emailRegex.test(email)) {
-        return true; // Return email  is invalid 
+    if (!validateName(name)) {
+        return res.status(400).json({ message: "Invalid name" });
     }
-    else {
-        return false;
+
+    if (!validateEmail(email)) {
+        return res.status(400).json({ message: "Invalid email" });
     }
-}
-
-function validateEmail(email) {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (regex.test(email)) {
-        return true
-    } else {
-        return false
-    }
-}
-
-
-exports.createUser = async function (req, res) {
     try {
-        console.log("in auth controller createUSer");
-        const {
-            name,
-            email,
-            password,
-            role,
-            phoneNumber
-        } = req.body;
-
-        if (!validateName(name)) {
-            return res.status(400).json({ message: "invalid name" });
-        }
-        else if (!validateEmail(email)) {
-            return res.status(400).json({ message: "invalid email" });
-        }
-        let result = await authService.createNewUser(name, email, password, role, phoneNumber);
-
+        const result = await authService.createNewUser(name, email, password, role, phoneNumber);
         res.status(201).json({ result });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
+
 
 exports.verifyEmail = async function (req, res) {
     try {
@@ -75,17 +55,66 @@ exports.login = async function (req, res) {
         res.status(400).json(error.message);
     };
 }
+// exports.verifyToken = async function (req, res, next) {
+//     try {
+//         if (mycache.has(Token)) {
+//             console.log("getting it from cached", Token);
+//             return res.send(mycache.get(Token));
+//         } else {
+//             const Token = req.headers.authorization.split(" ")[1];
+//             fetch(Token)
+//                 .then((response) => response.json())
+//                 .then((result) => {
+//                     mycache.set(Token, result);
+//                     console.log("fetching data again from server ")
+//                     res.status(200).send(result)
+//                 });
+
+//         }
+
+//         if (!Token)
+//             throw new Error({ message: "Access Denied , Token not found , please login with credential to genrate token " });
+//         const user = await authService.verifyToken(Token);
+//         console.log("user got")
+//         req.loggedInUser = user;
+//         next();
+//     } catch (error) {
+//         console.log("error in user post ", error);
+//         res.status(400).json({ message: error.message });
+//     }
+// };
+
+
+// const fetch = require('node-fetch'); // Import the fetch library if not already imported
+
 exports.verifyToken = async function (req, res, next) {
     try {
-        const Token = req.headers.authorization.split(" ")[1];
-        if (!Token)
-            throw new Error({ message: "Access Denied , Token not found , please login with credential to genrate token " });
-        const user = await authService.verifyToken(Token);
-        console.log("user got")
+        // const token = req.headers.authorization.split(" ")[1];
+        let response;
+        if (mycache.has("token")) {
+            console.log("Getting it from cache token");
+            response = mycache.get("token");
+            console.log(response);
+
+        } else {
+
+            response = req.headers.authorization.split(" ")[1];
+            if (!response)
+                throw new Error("Access Denied, Token not found. Please login with credentials to generate a token.");
+
+            console.log(response);
+            if (!response)
+                throw new Error("Failed to fetch data from server.");
+
+            mycache.set("token", response);
+            console.log("getting it from headers");
+        }
+        const user = await authService.verifyToken(response);
+        console.log("User found");
         req.loggedInUser = user;
         next();
     } catch (error) {
-        console.log("error in user post ", error);
+        console.log("Error in verifyToken:", error);
         res.status(400).json({ message: error.message });
     }
 };
@@ -125,9 +154,8 @@ exports.authorizedUser = (role) => {
         if (role == user.role) {
             next();
         } else {
-            res.status(403).json({
-                message: "User not Authorized !",
-            });
+            res.status(403).json({ message: "User not Authorized !" });
         }
     };
 };
+

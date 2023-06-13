@@ -8,7 +8,7 @@ Content-Type: application/json
 
 {
     "name":"vaibhav kumar",
-    "email":"viradnshk7@gmail.com",
+    "email":"vaibhavtezan@gmail.com",
     "password":"1234567",
     "role":"Admin",
     "phoneNumber":"8930485009"
@@ -21,8 +21,8 @@ POST http://localhost:3003/auth/emailVerification
 Content-Type: application/json
 
 {
-    "email":"viranshk7@gmail.com",
-    "otp":"263323"
+    "email":"vaibhavtezan@gmail.com",
+    "otp":"520706"
 }
 
 
@@ -32,7 +32,7 @@ POST http://localhost:3003/auth/login
 Content-Type: application/json
 
 {
-    "email":"viranshk7@gmail.com",
+    "email":"vaibhavtezan@gmail.com",
     "password":"1234567"
 }
 
@@ -53,13 +53,13 @@ Content-Type: application/json
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDgwYzQwY2ZlZDBjODViZTExZGYxNTQiLCJpc0FjdGl2ZSI6dHJ1ZSwiaWF0IjoxNjg2MTYwNzIzLCJleHAiOjE2ODYyNDcxMjN9.jdtAqPxmvORuV5dhrnQaRKbjrx_5KBECXAZq9AwNErE
 
 ####
-POST http://localhost:3003/product/createProduct
+POST http://localhost:3003/product/
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDgxNzJiY2Q2MWQ5MTk0MTM2YzljMGIiLCJpc0FjdGl2ZSI6dHJ1ZSwiaWF0IjoxNjg2MjE0MTEwLCJleHAiOjE2ODYzMDA1MTB9.kAkJdJ-euvaYhrF4m49ObLNTlPqJlG4rTlSL37s295A
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDg4YTJlZTJjN2ZkNGZlNDMwYzNhNDkiLCJpc0FjdGl2ZSI6dHJ1ZSwiaWF0IjoxNjg2Njc4MjIzLCJleHAiOjE2ODY3NjQ2MjN9.60D_Hu8vSnZcj6fnoJ59NTijFQPR7aFQicqxpZtzOoo
 
 {
-    "Title":"mango",
-    "Description":"mango is more delicious ",
+    "Title":"mango 2",
+    "Description":"mango2 is more delicious ",
     "Price":20,
     "Availability":true,
     "Category":"fruits"

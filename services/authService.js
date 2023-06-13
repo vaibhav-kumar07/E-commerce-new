@@ -3,6 +3,7 @@ const nodemailer = require("nodemailer");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt")
 const Secretkey = process.env.SECRETKEY;
+
 const sendotp = async (email, otp) => {
     try {
         let Desc, Sendingtext;
@@ -111,16 +112,16 @@ const login = async function (email, password) {
     }
 }
 
-const verifyToken = async (Token) => {
+const verifyToken = async (token) => {
     console.log("In Auth service to verify token ");
     try {
-        const token = await jwt.verify(Token, Secretkey);
-        console.log(token);
-        const user = await User.findOne({ _id: token._id, isActive: true });
-        console.log(user.token, Token);
+        const extractedtoken = await jwt.verify(token, Secretkey);
+        console.log(extractedtoken);
+        const user = await User.findOne({ _id: extractedtoken._id, isActive: true });
+        console.log(user.token, token);
         if (!user) {
             throw new Error("Your account is not activated.");
-        } else if (!(user.token == Token)) {
+        } else if (!(user.token == token)) {
             throw new Error("Access Denied. Please login with credentials to generate a token.");
         }
 
