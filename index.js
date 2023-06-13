@@ -5,9 +5,9 @@ app.use(express.json());
 require("dotenv").config();
 const dbutils = require("./utils/Dbutils");
 dbutils.initDB();
-const swaggerUi = require("swagger-ui-express");
-const swaggerSpec = require("./utils/swagger.json");
-app.use("/api", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+// const swaggerUi = require("swagger-ui-express");
+// const swaggerSpec = require("./utils/swagger.json");
+// app.use("/api", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 const auth_routes = require("./routes/authRoutes");
 const product_routes = require("./routes/productRoutes");
