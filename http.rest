@@ -41,8 +41,7 @@ Content-Type: application/json
 ###
 POST  http://localhost:3003/auth/changePassword
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDgwYzQwY2ZlZDBjODViZTExZGYxNTQiLCJpc0FjdGl2ZSI6dHJ1ZSwiaWF0IjoxNjg2MTYwNzIzLCJleHAiOjE2ODYyNDcxMjN9.jdtAqPxmvORuV5dhrnQaRKbjrx_5KBECXAZq9AwNErE
-
+Authorization: bearer 
 {
     "oldPassword":"123456",
     "newPassword":"1234567"
@@ -50,14 +49,11 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDgwYzQwY
 ###
 POST  http://localhost:3003/auth/logout
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDgwYzQwY2ZlZDBjODViZTExZGYxNTQiLCJpc0FjdGl2ZSI6dHJ1ZSwiaWF0IjoxNjg2MTYwNzIzLCJleHAiOjE2ODYyNDcxMjN9.jdtAqPxmvORuV5dhrnQaRKbjrx_5KBECXAZq9AwNErE
-
+Authorization: bearer 
 ####
 POST http://localhost:3003/product/
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDg4YTJlZTJjN2ZkNGZlNDMwYzNhNDkiLCJpc0FjdGl2ZSI6dHJ1ZSwiaWF0IjoxNjg2Njc4MjIzLCJleHAiOjE2ODY3NjQ2MjN9.60D_Hu8vSnZcj6fnoJ59NTijFQPR7aFQicqxpZtzOoo
-
-{
+Authorization: bearer 
     "Title":"mango 2",
     "Description":"mango2 is more delicious ",
     "Price":20,
@@ -73,8 +69,7 @@ Authorization: bearer
 ###
 
 PATCH http://localhost:3003/product/
-Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDgwYzQwY2ZlZDBjODViZTExZGYxNTQiLCJpc0FjdGl2ZSI6dHJ1ZSwiaWF0IjoxNjg2MTYwNzIzLCJleHAiOjE2ODYyNDcxMjN9.jdtAqPxmvORuV5dhrnQaRKbjrx_5KBECXAZq9AwNErE
+Content-Type: application/json 
 
 {
     "Productid":"64802f2507d6a2961cc02192",
@@ -88,15 +83,14 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDgwYzQwY
 ###
 DELETE http://localhost:3003/product/deleteProduct
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDgwYzQwY2ZlZDBjODViZTExZGYxNTQiLCJpc0FjdGl2ZSI6dHJ1ZSwiaWF0IjoxNjg2MTYwNzIzLCJleHAiOjE2ODYyNDcxMjN9.jdtAqPxmvORuV5dhrnQaRKbjrx_5KBECXAZq9AwNErE
-
+Authorization: bearer
 {
     "ProductId":"6480cd0f2ee7fd78ae092a0b"
 }
 ###
 POST http://localhost:3003/userCart/
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDg0NmQ4Mjk1OTMyMGVlMjNhZDY4ZjgiLCJpc0FjdGl2ZSI6dHJ1ZSwiaWF0IjoxNjg2NDAxNDc4LCJleHAiOjE2ODY0ODc4Nzh9.2nTyYowX1dNwXdfZW78GP-t9-WLP8-j7VykBkKGhQTg
+Authorization: bearer 
 
 {
     "products":[{
@@ -111,14 +105,14 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDg0NmQ4M
 ###
 GET  http://localhost:3003/cart/showCart
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDgwYWQzZGRmMzI5N2IwYjY4N2Y3MzIiLCJpc0FjdGl2ZSI6dHJ1ZSwiaWF0IjoxNjg2MTU4OTkxLCJleHAiOjE2ODYyNDUzOTF9.ynKhiiru4dZGg9FobpSZH1goonTCV5lnx2pqDhLErgU
+Authorization: bearer 
 
 
 
 ###
 POST http://localhost:3003/orders/placeOrder
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDgwYWQzZGRmMzI5N2IwYjY4N2Y3MzIiLCJpc0FjdGl2ZSI6dHJ1ZSwiaWF0IjoxNjg2MTU4OTkxLCJleHAiOjE2ODYyNDUzOTF9.ynKhiiru4dZGg9FobpSZH1goonTCV5lnx2pqDhLErgU
+Authorization: bearer 
 
 {
     "Address":"gurgaon"
@@ -126,4 +120,4 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDgwYWQzZ
 ###
 GET  http://localhost:3003/orders/showOrder
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDgwYWQzZGRmMzI5N2IwYjY4N2Y3MzIiLCJpc0FjdGl2ZSI6dHJ1ZSwiaWF0IjoxNjg2MTU4OTkxLCJleHAiOjE2ODYyNDUzOTF9.ynKhiiru4dZGg9FobpSZH1goonTCV5lnx2pqDhLErgU
+Authorization: bearer 
