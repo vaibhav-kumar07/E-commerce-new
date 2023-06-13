@@ -53,9 +53,7 @@ const createNewUser = async function (name, email, password, role, phoneNumber) 
                 password,
             });
             const otp = Math.floor(100000 + Math.random() * 900000).toString();
-
             await sendotp(email, otp);
-
             let result = await newUser.save();
             await User.updateOne({ email }, { otp }, { upsert: true });
             return result;

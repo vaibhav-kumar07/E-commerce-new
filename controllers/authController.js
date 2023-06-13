@@ -1,4 +1,28 @@
 const authService = require("../services/authService");
+const User = require("../models/userSchema")
+
+function validateName(name, email) {
+    const regex = /^[a-zA-Z0-9\s-]*$/;
+    const emailRegex = /^(?!.*[<>]).*[\w+\-.]+@[a-zA-Z0-9\-]+(\.[a-zA-Z]{2,})+$/
+    if (regex.test(name)) {
+        return true; // Return null when name is valid
+    } else if (emailRegex.test(email)) {
+        return true; // Return email  is invalid 
+    }
+    else {
+        return false;
+    }
+}
+
+function validateEmail(email) {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (regex.test(email)) {
+        return true
+    } else {
+        return false
+    }
+}
+
 
 exports.createUser = async function (req, res) {
     try {
@@ -10,8 +34,15 @@ exports.createUser = async function (req, res) {
             role,
             phoneNumber
         } = req.body;
+
+        if (!validateName(name)) {
+            return res.status(400).json({ message: "invalid name" });
+        }
+        else if (!validateEmail(email)) {
+            return res.status(400).json({ message: "invalid email" });
+        }
         let result = await authService.createNewUser(name, email, password, role, phoneNumber);
-        console.log(result);
+
         res.status(201).json({ result });
     } catch (error) {
         res.status(500).json({ message: error.message });

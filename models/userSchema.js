@@ -8,26 +8,20 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     maxlength: 15,
-    validate: {
-      validator: function (name) {
-        // Input validation regex
-        const regex = /^[a-zA-Z0-9\s-]*$/;
-        return regex.test(name);
-      },
-      message: "Invalid name format.",
-    },
+    // validate: {
+    //   validator: function (name) {
+    //     // Input validation regex
+    //     const regex = /^[a-zA-Z0-9\s-]*$/;
+    //     return regex.test(name);
+    //   },
+    //   message: "Invalid name format.",
+    // },
   },
   email: {
     type: String,
     required: true,
     unique: true,
     lowercase: true,
-    validate: {
-      validator: function (email) {
-        return emailRegex.test(email);
-      },
-      message: "Invalid email format."
-    }
   },
   password: {
     type: String,
